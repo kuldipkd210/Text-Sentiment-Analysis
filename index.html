@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentiment Analysis App</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Sentiment Analysis</h1>
+
+        <div class="card">
+            <form method="POST">
+                <textarea name="text" placeholder="Type or paste your text here to analyze sentiment..."
+                    required>{{ user_text }}</textarea>
+                <button type="submit">Analyze Text</button>
+            </form>
+        </div>
+
+        {% if sentiment %}
+        <div class="result-card">
+            <div
+                class="sentiment-badge {% if sentiment == 'Positive' %}positive{% elif sentiment == 'Negative' %}negative{% else %}neutral{% endif %}">
+                {{ sentiment }}
+            </div>
+
+            <div class="metrics">
+                <div class="metric-item">
+                    <strong>Polarity</strong>
+                    <span>{{ polarity }}</span>
+                </div>
+                <div class="metric-item">
+                    <strong>Subjectivity</strong>
+                    <span>{{ subjectivity }}</span>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+
+</body>
+
+</html>
